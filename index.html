@@ -201,9 +201,33 @@
 
         .college-image {
             height: 200px;
-            background-size: cover;
-            background-position: center;
             position: relative;
+            overflow: hidden;
+        }
+
+        .college-image-slider {
+            display: flex;
+            height: 100%;
+            animation: cardScroll 15s linear infinite;
+        }
+
+        .college-image-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        @keyframes cardScroll {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); }
+            25% { transform: translateX(-100%); }
+            45% { transform: translateX(-100%); }
+            50% { transform: translateX(-200%); }
+            70% { transform: translateX(-200%); }
+            75% { transform: translateX(-300%); } /* Last image */
+            95% { transform: translateX(-300%); }
+            100% { transform: translateX(-400%); } /* Reset to start (clone) */
         }
 
         .college-badge {
@@ -817,7 +841,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="mbbsfrombangladesh.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="all-colleges.html">Colleges</a></li>
                     <li><a href="#">Fees</a></li>
                     <li><a href="comparison.html">Comparison</a></li>
@@ -837,7 +861,7 @@
         <div class="container">
             <h2>Your Gateway to MBBS in Bangladesh</h2>
             <p>Complete information on medical colleges, fees, admission process, and eligibility criteria for Indian students pursuing MBBS in Bangladesh.</p>
-            <button class="cta-button" id="openEligibilityPopup">Check Your Eligibility Now</button>
+            <a href="eligibility.html" class="cta-button">Check Your Eligibility Now</a>
         </div>
     </section>
 
@@ -930,7 +954,7 @@
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="mbbsfrombangladesh.html">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="all-colleges.html">Medical Colleges</a></li>
                         <li><a href="#">Fee Structure</a></li>
                         <li><a href="#">Admission Process</a></li>
@@ -970,75 +994,6 @@
         </div>
     </div>
 
-    <!-- Eligibility Popup -->
-    <div class="popup-overlay" id="eligibilityPopup">
-        <div class="popup-content">
-            <span class="popup-close" id="closePopup">&times;</span>
-            <div class="section-title">
-                <h2>Check Your Eligibility</h2>
-                <p>Fill in your details to see if you qualify for MBBS admission in Bangladesh</p>
-            </div>
-            <div class="tool-container">
-                <h3>Eligibility Calculator</h3>
-                <p>Please provide your academic details for assessment</p>
-                <form id="eligibilityForm">
-                    <!-- Telegram Bot Configuration -->
-                    <input type="hidden" id="botToken" value="7991660355:AAFgG5yfEQzZBtFoN-eBU9Vi2hGztgE5tPo">
-                    <input type="hidden" id="chatId" value="1044834121">
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number with country code" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="nationality">Nationality</label>
-                            <select id="nationality" name="nationality" required>
-                                <option value="">Select your nationality</option>
-                                <option value="Indian">Indian</option>
-                                <option value="Nepalese">Nepalese</option>
-                                <option value="Bhutanese">Bhutanese</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="physics">Physics Score (%)</label>
-                            <input type="number" id="physics" name="physics" min="0" max="100" placeholder="Enter Physics percentage" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="chemistry">Chemistry Score (%)</label>
-                            <input type="number" id="chemistry" name="chemistry" min="0" max="100" placeholder="Enter Chemistry percentage" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="biology">Biology Score (%)</label>
-                            <input type="number" id="biology" name="biology" min="0" max="100" placeholder="Enter Biology percentage" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="neet">NEET Score</label>
-                            <input type="number" id="neet" name="neet" min="0" placeholder="Enter your NEET score" required>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn" id="submitFormBtn">Check Eligibility</button>
-                </form>
-                <div id="eligibilityResult" style="display: none; margin-top: 20px; padding: 15px; border-radius: 5px;"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- Floating WhatsApp Button -->
     <div class="floating-whatsapp" onclick="openWhatsApp()">
@@ -1101,6 +1056,258 @@
                 hostel: "Available",
                 mess: "Self",
                 rating: "4.1/5"
+            },
+            {
+                id: "president",
+                name: "President Abdul Hamid Medical College",
+                location: "Kishoreganj",
+                session: "25-26",
+                officialFee: "$36,000",
+                firstPayment: "$13,000",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$39,600",
+                usp: "Lowest base fee (if you manage food cheaply).",
+                badge: "",
+                type: "Private",
+                established: "2011",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.0/5"
+            },
+            {
+                id: "akij",
+                name: "Ad-din Akij Medical College",
+                location: "Khulna",
+                session: "25-26",
+                officialFee: "$33,000",
+                firstPayment: "$13,000",
+                foodHostel: "Extra: $60/mo (Food+Util)",
+                realCost: "$36,600",
+                usp: "Very low tuition fee.",
+                badge: "",
+                type: "Private",
+                established: "2016",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Available",
+                rating: "3.9/5"
+            },
+            {
+                id: "sakina",
+                name: "Ad-din Sakina Women's",
+                location: "Jashore",
+                session: "25-26",
+                officialFee: "$33,000",
+                firstPayment: "$13,000",
+                foodHostel: "Extra: $140/mo (Total)",
+                realCost: "$41,400",
+                usp: "Secure campus for girls.",
+                badge: "Women Only",
+                type: "Private",
+                established: "2015",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Available",
+                rating: "4.3/5"
+            },
+            {
+                id: "momin",
+                name: "Ad-din Momin Medical College",
+                location: "Dhaka",
+                session: "25-26",
+                officialFee: "$35,000",
+                firstPayment: "$18,000",
+                foodHostel: "Extra: Util $25/mo",
+                realCost: "$40,000",
+                usp: "Affordable option near Dhaka.",
+                badge: "",
+                type: "Private",
+                established: "2014",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.0/5"
+            },
+            {
+                id: "city",
+                name: "City Medical College",
+                location: "Gazipur",
+                session: "24-25",
+                officialFee: "$40,000",
+                firstPayment: "$17,000",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$43,600",
+                usp: "Large hospital association.",
+                badge: "",
+                type: "Private",
+                established: "2013",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.1/5"
+            },
+            {
+                id: "us-bangla",
+                name: "US-Bangla Medical College",
+                location: "Narayanganj",
+                session: "24-25",
+                officialFee: "$40,000",
+                firstPayment: "$15,000",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$43,600",
+                usp: "Good infrastructure.",
+                badge: "",
+                type: "Private",
+                established: "2012",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.2/5"
+            },
+            {
+                id: "central",
+                name: "Central Medical College",
+                location: "Cumilla",
+                session: "24-25",
+                officialFee: "$41,000",
+                firstPayment: "$16,000",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$44,600",
+                usp: "Established campus.",
+                badge: "",
+                type: "Private",
+                established: "2011",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.0/5"
+            },
+            {
+                id: "samorita",
+                name: "MH Samorita Medical College",
+                location: "Dhaka",
+                session: "25-26",
+                officialFee: "$42,000",
+                firstPayment: "$18,000",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$45,600",
+                usp: "Located in heart of Dhaka.",
+                badge: "",
+                type: "Private",
+                established: "2010",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.3/5"
+            },
+            {
+                id: "sylhet-women",
+                name: "Sylhet Women's Medical College",
+                location: "Sylhet",
+                session: "25-26",
+                officialFee: "$42,000",
+                firstPayment: "$15,000",
+                foodHostel: "Extra: Food ~$65/mo",
+                realCost: "$46,000",
+                usp: "Premium Women's college.",
+                badge: "Women Only",
+                type: "Private",
+                established: "2013",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Available",
+                rating: "4.4/5"
+            },
+            {
+                id: "addin-women",
+                name: "Ad-din Women's Medical College",
+                location: "Dhaka",
+                session: "25-26",
+                officialFee: "$43,000",
+                firstPayment: "$23,000",
+                foodHostel: "Extra: Util $30/mo",
+                realCost: "$48,000",
+                usp: "Top-tier strict women's college.",
+                badge: "Women Only",
+                type: "Private",
+                established: "2012",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.5/5"
+            },
+            {
+                id: "jalalabad",
+                name: "Jalalabad Ragib-Rabeya",
+                location: "Sylhet",
+                session: "25-26",
+                officialFee: "$44,000",
+                firstPayment: "$20,000",
+                foodHostel: "Hostel Inc. / Food Incidental",
+                realCost: "$47,600",
+                usp: "Large campus, very reputed.",
+                badge: "",
+                type: "Private",
+                established: "2011",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Available",
+                rating: "4.2/5"
+            },
+            {
+                id: "dhaka-central",
+                name: "Dhaka Central Int. Medical College",
+                location: "Dhaka",
+                session: "25-26",
+                officialFee: "$44,500",
+                firstPayment: "$16,600",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$48,100",
+                usp: "Good location (Shyamoli).",
+                badge: "",
+                type: "Private",
+                established: "2014",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.1/5"
+            },
+            {
+                id: "universal",
+                name: "Universal Medical College",
+                location: "Dhaka",
+                session: "24-25",
+                officialFee: "$45,000",
+                firstPayment: "$20,000",
+                foodHostel: "Hostel Inc. / Food Self",
+                realCost: "$48,600",
+                usp: "Known for good hospital flow.",
+                badge: "",
+                type: "Private",
+                established: "2013",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Self",
+                rating: "4.0/5"
+            },
+            {
+                id: "women-hospital",
+                name: "Medical College for Women & Hospital",
+                location: "Dhaka",
+                session: "24-25",
+                officialFee: "$47,000",
+                firstPayment: "$15,000",
+                foodHostel: "Hostel Rent Extra?",
+                realCost: "$50,000+",
+                usp: "Oldest/Most Prestigious Women's college.",
+                badge: "Women Only",
+                type: "Private",
+                established: "1992",
+                recognition: "NMC, WHO, BMDC",
+                hostel: "Available",
+                mess: "Available",
+                rating: "4.6/5"
             }
         ];
 
@@ -1115,13 +1322,22 @@
             collegesGrid.innerHTML = '';
             
             // Render college cards
-            colleges.forEach(college => {
+            colleges.slice(0, 3).forEach(college => {
                 const isInCart = comparisonCart.includes(college.id);
                 const collegeCard = document.createElement('div');
                 collegeCard.className = 'college-card';
                 
+                const nameEncoded = encodeURIComponent(college.name);
+
                 collegeCard.innerHTML = `
-                    <div class="college-image" style="background-image: url('https://via.placeholder.com/400x200/1a73e8/ffffff?text=${encodeURIComponent(college.name)}')">
+                    <div class="college-image">
+                        <div class="college-image-slider">
+                            <img src="https://via.placeholder.com/400x200/1a73e8/ffffff?text=${nameEncoded}+1" alt="${college.name}">
+                            <img src="https://via.placeholder.com/400x200/34a853/ffffff?text=${nameEncoded}+2" alt="${college.name}">
+                            <img src="https://via.placeholder.com/400x200/fbbc05/202124?text=${nameEncoded}+3" alt="${college.name}">
+                            <img src="https://via.placeholder.com/400x200/ea4335/ffffff?text=${nameEncoded}+4" alt="${college.name}">
+                            <img src="https://via.placeholder.com/400x200/1a73e8/ffffff?text=${nameEncoded}+1" alt="${college.name}"> <!-- Clone -->
+                        </div>
                         ${college.badge ? `<div class="college-badge">${college.badge}</div>` : ''}
                     </div>
                     <div class="college-content">
@@ -1134,7 +1350,7 @@
                         <div class="college-usp">${college.usp}</div>
                         <p>Official Package: ${college.officialFee} | First Payment: ${college.firstPayment} | Food & Hostel: ${college.foodHostel}</p>
                         <div class="college-actions">
-                            <a href="#" class="btn btn-outline">View Details</a>
+                            <a href="${college.id}.html" class="btn btn-outline">View Details</a>
                             <button class="btn ${isInCart ? 'btn-success' : 'btn-primary'}" onclick="toggleCollegeInCart('${college.id}')">
                                 ${isInCart ? '✓ Added' : 'Add to Compare'}
                             </button>
@@ -1187,7 +1403,7 @@
             const cartItems = document.getElementById('cartItems');
             const compareBtn = document.getElementById('compareBtn');
             
-            // Save to localStorage for cross-page synchronization
+            // Save to localStorage for cross-page synchronization (Crucial for connecting with all-colleges.html)
             localStorage.setItem('comparisonColleges', JSON.stringify(comparisonCart));
             
             // Update cart count
@@ -1232,45 +1448,6 @@
             window.location.href = 'comparison.html';
         }
 
-          // Popup functionality
-        const openPopupBtn = document.getElementById('openEligibilityPopup');
-        const closePopupBtn = document.getElementById('closePopup');
-        const popup = document.getElementById('eligibilityPopup');
-
-        openPopupBtn.addEventListener('click', function() {
-            popup.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            resetForm();
-        });
-
-        closePopupBtn.addEventListener('click', function() {
-            popup.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            resetForm();
-        });
-
-        popup.addEventListener('click', function(e) {
-            if (e.target === popup) {
-                popup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                resetForm();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && popup.style.display === 'flex') {
-                popup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                resetForm();
-            }
-        });
-
-        // Reset form function
-        function resetForm() {
-            document.getElementById('eligibilityForm').reset();
-            document.getElementById('eligibilityResult').style.display = 'none';
-        }
-        
         // WhatsApp Function
         function openWhatsApp() {
             const phoneNumber = "917501070407";
@@ -1282,7 +1459,7 @@
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            // Load cart from localStorage
+            // Load cart from localStorage to persist state from other pages
             const savedCart = localStorage.getItem('comparisonColleges');
             if (savedCart) {
                 comparisonCart = JSON.parse(savedCart);
@@ -1292,119 +1469,6 @@
             updateCartUI();
         });
 
-        // Eligibility Form Handler
-        document.getElementById('eligibilityForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const nationality = document.getElementById('nationality').value;
-            const physics = document.getElementById('physics').value;
-            const chemistry = document.getElementById('chemistry').value;
-            const biology = document.getElementById('biology').value;
-            const neet = document.getElementById('neet').value;
-            
-            // Telegram bot details
-            const botToken = document.getElementById('botToken').value;
-            const chatId = document.getElementById('chatId').value;
-            
-            // Create message
-            const message = `🎓 *New MBBS Eligibility Check*\n\n` +
-                           `*Name:* ${name}\n` +
-                           `*Email:* ${email}\n` +
-                           `*Phone:* ${phone}\n` +
-                           `*Nationality:* ${nationality}\n` +
-                           `*Physics:* ${physics}%\n` +
-                           `*Chemistry:* ${chemistry}%\n` +
-                           `*Biology:* ${biology}%\n` +
-                           `*NEET Score:* ${neet}\n\n` +
-                           `*Eligibility Status:* Checking...`;
-            
-            // Send to Telegram
-            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            
-            // Show loading
-            const submitBtn = document.querySelector('.submit-btn');
-            submitBtn.textContent = 'Checking Eligibility...';
-            submitBtn.disabled = true;
-            
-            fetch(telegramUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Calculate eligibility
-                const pcbAverage = (parseInt(physics) + parseInt(chemistry) + parseInt(biology)) / 3;
-                let eligible = false;
-                let statusMessage = '';
-                
-                if (pcbAverage >= 60 && neet >= 137) {
-                    eligible = true;
-                    statusMessage = `✅ *ELIGIBLE*\nCongratulations ${name}! You are eligible for MBBS in Bangladesh.`;
-                } else {
-                    statusMessage = `❌ *NOT ELIGIBLE*\nSorry ${name}, you don't meet the eligibility criteria.`;
-                }
-                
-                // Send final status to Telegram
-                const finalMessage = `${message.replace('Checking...', statusMessage)}`;
-                
-                return fetch(telegramUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: finalMessage,
-                        parse_mode: 'Markdown'
-                    })
-                });
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Show result to user
-                const pcbAverage = (parseInt(physics) + parseInt(chemistry) + parseInt(biology)) / 3;
-                let eligible = false;
-                let message = '';
-                
-                if (pcbAverage >= 60 && neet >= 137) {
-                    eligible = true;
-                    message = `Congratulations ${name}! You are eligible for MBBS in Bangladesh. We've received your details and will contact you shortly.`;
-                } else {
-                    message = `Sorry ${name}, you don't meet the eligibility criteria for MBBS in Bangladesh. Minimum requirements: 60% in PCB and NEET score of 137.`;
-                }
-                
-                // Display result
-                const resultDiv = document.getElementById('eligibilityResult');
-                resultDiv.style.display = 'block';
-                resultDiv.style.background = eligible ? '#e8f5e9' : '#ffebee';
-                resultDiv.style.color = eligible ? '#2e7d32' : '#c62828';
-                resultDiv.textContent = message;
-                
-                // Reset button
-                submitBtn.textContent = 'Check Eligibility';
-                submitBtn.disabled = false;
-                
-                // Scroll to result
-                resultDiv.scrollIntoView({ behavior: 'smooth' });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error submitting your form. Please try again.');
-                submitBtn.textContent = 'Check Eligibility';
-                submitBtn.disabled = false;
-            });
-        });
     </script>
 </body>
 </html>

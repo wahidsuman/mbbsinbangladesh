@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Eligibility - MBBS Bangladesh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --gray: #5f6368;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        /* Auth Buttons */
+        .auth-buttons button {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .login:hover {
+             background: rgba(26, 115, 232, 0.1);
+        }
+
+        .register {
+            background: var(--primary);
+            border: 1px solid var(--primary);
+            color: white;
+        }
+
+        .register:hover {
+            background: #0d62d9;
+        }
+
+        /* Main Content */
+        .eligibility-section {
+            padding: 60px 0;
+            flex: 1;
+        }
+
+        .eligibility-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+        }
+
+        /* Form Styles */
+        .tool-container h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #0d62d9;
+        }
+
+        .submit-btn:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+        }
+
+        /* Result Box */
+        #eligibilityResult {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bdc1c6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc1c6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            nav ul {
+                margin: 15px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .eligibility-container {
+                padding: 20px;
+                margin: 0 15px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+                <h1>MBBS<span>Bangladesh</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="all-colleges.html">Colleges</a></li>
+                    <li><a href="#">Fees</a></li>
+                    <li><a href="comparison.html">Comparison</a></li>
+                    <li><a href="#">Admission</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="login">Login</button>
+                <button class="register">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="eligibility-section">
+        <div class="container">
+            <div class="eligibility-container">
+                <div class="section-title">
+                    <h2>Check Your Eligibility</h2>
+                    <p>Fill in your details to see if you qualify for MBBS admission in Bangladesh</p>
+                </div>
+
+                <div class="tool-container">
+                    <h3>Eligibility Calculator</h3>
+                    <p style="margin-bottom: 20px; color: var(--gray);">Please provide your academic details for assessment</p>
+
+                    <form id="eligibilityForm">
+                        <!-- Telegram Bot Configuration -->
+                        <input type="hidden" id="botToken" value="7991660355:AAFgG5yfEQzZBtFoN-eBU9Vi2hGztgE5tPo">
+                        <input type="hidden" id="chatId" value="1044834121">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number with country code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality</label>
+                                <select id="nationality" name="nationality" required>
+                                    <option value="">Select your nationality</option>
+                                    <option value="Indian">Indian</option>
+                                    <option value="Nepalese">Nepalese</option>
+                                    <option value="Bhutanese">Bhutanese</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="physics">Physics Score (%)</label>
+                                <input type="number" id="physics" name="physics" min="0" max="100" placeholder="Enter Physics percentage" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="chemistry">Chemistry Score (%)</label>
+                                <input type="number" id="chemistry" name="chemistry" min="0" max="100" placeholder="Enter Chemistry percentage" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="biology">Biology Score (%)</label>
+                                <input type="number" id="biology" name="biology" min="0" max="100" placeholder="Enter Biology percentage" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="neet">NEET Score</label>
+                                <input type="number" id="neet" name="neet" min="0" placeholder="Enter your NEET score" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitFormBtn">Check Eligibility</button>
+                    </form>
+                    <div id="eligibilityResult" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MBBS Bangladesh</h3>
+                    <p>Your complete guide to pursuing MBBS in Bangladesh. We provide accurate information on medical colleges, fees, admission process, and more.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="all-colleges.html">Medical Colleges</a></li>
+                        <li><a href="#">Fee Structure</a></li>
+                        <li><a href="#">Admission Process</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+                        <li><i class="fas fa-phone"></i> +880 1234 567890</li>
+                        <li><i class="fas fa-envelope"></i> info@mbbscolleges.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MBBS Bangladesh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Eligibility Form Handler
+        document.getElementById('eligibilityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const nationality = document.getElementById('nationality').value;
+            const physics = document.getElementById('physics').value;
+            const chemistry = document.getElementById('chemistry').value;
+            const biology = document.getElementById('biology').value;
+            const neet = document.getElementById('neet').value;
+
+            // Telegram bot details
+            const botToken = document.getElementById('botToken').value;
+            const chatId = document.getElementById('chatId').value;
+
+            // Create message
+            const message = `🎓 *New MBBS Eligibility Check*\n\n` +
+                           `*Name:* ${name}\n` +
+                           `*Email:* ${email}\n` +
+                           `*Phone:* ${phone}\n` +
+                           `*Nationality:* ${nationality}\n` +
+                           `*Physics:* ${physics}%\n` +
+                           `*Chemistry:* ${chemistry}%\n` +
+                           `*Biology:* ${biology}%\n` +
+                           `*NEET Score:* ${neet}\n\n` +
+                           `*Eligibility Status:* Checking...`;
+
+            // Send to Telegram
+            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            // Show loading
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.textContent = 'Checking Eligibility...';
+            submitBtn.disabled = true;
+
+            fetch(telegramUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Calculate eligibility
+                const pcbAverage = (parseInt(physics) + parseInt(chemistry) + parseInt(biology)) / 3;
+                let eligible = false;
+                let statusMessage = '';
+
+                // Eligibility Logic (Matches index.html)
+                if (pcbAverage >= 60 && neet >= 137) {
+                    eligible = true;
+                    statusMessage = `✅ *ELIGIBLE*\nCongratulations ${name}! You are eligible for MBBS in Bangladesh.`;
+                } else {
+                    statusMessage = `❌ *NOT ELIGIBLE*\nSorry ${name}, you don't meet the eligibility criteria.`;
+                }
+
+                // Send final status to Telegram
+                const finalMessage = `${message.replace('Checking...', statusMessage)}`;
+
+                return fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: finalMessage,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show result to user
+                const pcbAverage = (parseInt(physics) + parseInt(chemistry) + parseInt(biology)) / 3;
+                let eligible = false;
+                let message = '';
+
+                if (pcbAverage >= 60 && neet >= 137) {
+                    eligible = true;
+                    message = `Congratulations ${name}! You are eligible for MBBS in Bangladesh. We've received your details and will contact you shortly.`;
+                } else {
+                    message = `Sorry ${name}, you don't meet the eligibility criteria for MBBS in Bangladesh. Minimum requirements: 60% in PCB and NEET score of 137.`;
+                }
+
+                // Display result
+                const resultDiv = document.getElementById('eligibilityResult');
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = eligible ? '#e8f5e9' : '#ffebee';
+                resultDiv.style.color = eligible ? '#2e7d32' : '#c62828';
+                resultDiv.textContent = message;
+
+                // Reset button
+                submitBtn.textContent = 'Check Eligibility';
+                submitBtn.disabled = false;
+
+                // Scroll to result
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your form. Please try again.');
+                submitBtn.textContent = 'Check Eligibility';
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>

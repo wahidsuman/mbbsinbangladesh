@@ -861,7 +861,7 @@
         <div class="container">
             <h2>Your Gateway to MBBS in Bangladesh</h2>
             <p>Complete information on medical colleges, fees, admission process, and eligibility criteria for Indian students pursuing MBBS in Bangladesh.</p>
-            <button class="cta-button" id="openEligibilityPopup">Check Your Eligibility Now</button>
+            <a href="eligibility.html" class="cta-button">Check Your Eligibility Now</a>
         </div>
     </section>
 
@@ -994,75 +994,6 @@
         </div>
     </div>
 
-    <!-- Eligibility Popup -->
-    <div class="popup-overlay" id="eligibilityPopup">
-        <div class="popup-content">
-            <span class="popup-close" id="closePopup">&times;</span>
-            <div class="section-title">
-                <h2>Check Your Eligibility</h2>
-                <p>Fill in your details to see if you qualify for MBBS admission in Bangladesh</p>
-            </div>
-            <div class="tool-container">
-                <h3>Eligibility Calculator</h3>
-                <p>Please provide your academic details for assessment</p>
-                <form id="eligibilityForm">
-                    <!-- Telegram Bot Configuration -->
-                    <input type="hidden" id="botToken" value="7991660355:AAFgG5yfEQzZBtFoN-eBU9Vi2hGztgE5tPo">
-                    <input type="hidden" id="chatId" value="1044834121">
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number with country code" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="nationality">Nationality</label>
-                            <select id="nationality" name="nationality" required>
-                                <option value="">Select your nationality</option>
-                                <option value="Indian">Indian</option>
-                                <option value="Nepalese">Nepalese</option>
-                                <option value="Bhutanese">Bhutanese</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="physics">Physics Score (%)</label>
-                            <input type="number" id="physics" name="physics" min="0" max="100" placeholder="Enter Physics percentage" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="chemistry">Chemistry Score (%)</label>
-                            <input type="number" id="chemistry" name="chemistry" min="0" max="100" placeholder="Enter Chemistry percentage" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="biology">Biology Score (%)</label>
-                            <input type="number" id="biology" name="biology" min="0" max="100" placeholder="Enter Biology percentage" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="neet">NEET Score</label>
-                            <input type="number" id="neet" name="neet" min="0" placeholder="Enter your NEET score" required>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn" id="submitFormBtn">Check Eligibility</button>
-                </form>
-                <div id="eligibilityResult" style="display: none; margin-top: 20px; padding: 15px; border-radius: 5px;"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- Floating WhatsApp Button -->
     <div class="floating-whatsapp" onclick="openWhatsApp()">
@@ -1517,45 +1448,6 @@
             window.location.href = 'comparison.html';
         }
 
-          // Popup functionality
-        const openPopupBtn = document.getElementById('openEligibilityPopup');
-        const closePopupBtn = document.getElementById('closePopup');
-        const popup = document.getElementById('eligibilityPopup');
-
-        openPopupBtn.addEventListener('click', function() {
-            popup.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            resetForm();
-        });
-
-        closePopupBtn.addEventListener('click', function() {
-            popup.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            resetForm();
-        });
-
-        popup.addEventListener('click', function(e) {
-            if (e.target === popup) {
-                popup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                resetForm();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && popup.style.display === 'flex') {
-                popup.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                resetForm();
-            }
-        });
-
-        // Reset form function
-        function resetForm() {
-            document.getElementById('eligibilityForm').reset();
-            document.getElementById('eligibilityResult').style.display = 'none';
-        }
-        
         // WhatsApp Function
         function openWhatsApp() {
             const phoneNumber = "917501070407";
@@ -1577,119 +1469,6 @@
             updateCartUI();
         });
 
-        // Eligibility Form Handler
-        document.getElementById('eligibilityForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const nationality = document.getElementById('nationality').value;
-            const physics = document.getElementById('physics').value;
-            const chemistry = document.getElementById('chemistry').value;
-            const biology = document.getElementById('biology').value;
-            const neet = document.getElementById('neet').value;
-            
-            // Telegram bot details
-            const botToken = document.getElementById('botToken').value;
-            const chatId = document.getElementById('chatId').value;
-            
-            // Create message
-            const message = `🎓 *New MBBS Eligibility Check*\n\n` +
-                           `*Name:* ${name}\n` +
-                           `*Email:* ${email}\n` +
-                           `*Phone:* ${phone}\n` +
-                           `*Nationality:* ${nationality}\n` +
-                           `*Physics:* ${physics}%\n` +
-                           `*Chemistry:* ${chemistry}%\n` +
-                           `*Biology:* ${biology}%\n` +
-                           `*NEET Score:* ${neet}\n\n` +
-                           `*Eligibility Status:* Checking...`;
-            
-            // Send to Telegram
-            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-            
-            // Show loading
-            const submitBtn = document.querySelector('.submit-btn');
-            submitBtn.textContent = 'Checking Eligibility...';
-            submitBtn.disabled = true;
-            
-            fetch(telegramUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Calculate eligibility
-                const pcbAverage = (parseInt(physics) + parseInt(chemistry) + parseInt(biology)) / 3;
-                let eligible = false;
-                let statusMessage = '';
-                
-                if (pcbAverage >= 60 && neet >= 137) {
-                    eligible = true;
-                    statusMessage = `✅ *ELIGIBLE*\nCongratulations ${name}! You are eligible for MBBS in Bangladesh.`;
-                } else {
-                    statusMessage = `❌ *NOT ELIGIBLE*\nSorry ${name}, you don't meet the eligibility criteria.`;
-                }
-                
-                // Send final status to Telegram
-                const finalMessage = `${message.replace('Checking...', statusMessage)}`;
-                
-                return fetch(telegramUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: finalMessage,
-                        parse_mode: 'Markdown'
-                    })
-                });
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Show result to user
-                const pcbAverage = (parseInt(physics) + parseInt(chemistry) + parseInt(biology)) / 3;
-                let eligible = false;
-                let message = '';
-                
-                if (pcbAverage >= 60 && neet >= 137) {
-                    eligible = true;
-                    message = `Congratulations ${name}! You are eligible for MBBS in Bangladesh. We've received your details and will contact you shortly.`;
-                } else {
-                    message = `Sorry ${name}, you don't meet the eligibility criteria for MBBS in Bangladesh. Minimum requirements: 60% in PCB and NEET score of 137.`;
-                }
-                
-                // Display result
-                const resultDiv = document.getElementById('eligibilityResult');
-                resultDiv.style.display = 'block';
-                resultDiv.style.background = eligible ? '#e8f5e9' : '#ffebee';
-                resultDiv.style.color = eligible ? '#2e7d32' : '#c62828';
-                resultDiv.textContent = message;
-                
-                // Reset button
-                submitBtn.textContent = 'Check Eligibility';
-                submitBtn.disabled = false;
-                
-                // Scroll to result
-                resultDiv.scrollIntoView({ behavior: 'smooth' });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error submitting your form. Please try again.');
-                submitBtn.textContent = 'Check Eligibility';
-                submitBtn.disabled = false;
-            });
-        });
     </script>
 </body>
 </html>

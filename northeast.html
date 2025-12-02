@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North East Medical College - MBBS Bangladesh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #fbbc05;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --gray: #5f6368;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons button {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .login:hover {
+            background: rgba(26, 115, 232, 0.1);
+        }
+
+        .register {
+            background: var(--primary);
+            border: 1px solid var(--primary);
+            color: white;
+        }
+
+        .register:hover {
+            background: #0d62d9;
+        }
+
+        /* College Details Styles */
+        .college-hero {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: white;
+            padding: 80px 0 120px;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .hero-meta {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .hero-badge {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .main-content {
+            margin-top: -80px;
+            padding-bottom: 80px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* Carousel Styles */
+        .college-carousel {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            /* Animation for 5 images scrolling */
+            animation: scroll 20s linear infinite;
+        }
+
+        .carousel-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); } /* Pause */
+            25% { transform: translateX(-100%); } /* Slide */
+            45% { transform: translateX(-100%); } /* Pause */
+            50% { transform: translateX(-200%); } /* Slide */
+            70% { transform: translateX(-200%); } /* Pause */
+            75% { transform: translateX(-300%); } /* Slide */
+            95% { transform: translateX(-300%); } /* Pause */
+            100% { transform: translateX(-400%); } /* Slide */
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table th, .info-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+        }
+
+        .info-table th {
+            font-weight: 600;
+            color: var(--gray);
+            width: 40%;
+        }
+
+        .info-table tr:last-child td, .info-table tr:last-child th {
+            border-bottom: none;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .price-tag {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li i {
+            color: var(--secondary);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0d62d9;
+        }
+
+        .btn-success {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #2c8e47;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Floating Cart & Footer from index.html */
+        .floating-cart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            width: 350px;
+            max-width: 90vw;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .floating-cart.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cart-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .cart-count {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .cart-content {
+            padding: 15px 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-name {
+            flex: 1;
+            font-size: 14px;
+            color: var(--dark);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 16px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .cart-item-remove:hover {
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+            padding: 20px 0;
+        }
+
+        .cart-actions {
+            padding: 15px 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .cart-actions .btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bdc1c6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc1c6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .college-carousel {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+                <h1>MBBS<span>Bangladesh</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="all-colleges.html">Colleges</a></li>
+                    <li><a href="#">Fees</a></li>
+                    <li><a href="comparison.html">Comparison</a></li>
+                    <li><a href="#">Admission</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="login">Login</button>
+                <button class="register">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="college-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">ROI Focused</div>
+                <h1>North East Medical College</h1>
+                <div class="hero-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Sylhet</span>
+                    <span><i class="fas fa-university"></i> Established: 2012</span>
+                    <span><i class="fas fa-star"></i> 4.1/5</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-grid">
+                <!-- Left Column -->
+                <div class="main-details">
+                    <div class="card">
+                        <!-- Carousel Container -->
+                        <div class="college-carousel">
+                            <div class="carousel-track">
+                                <img src="https://via.placeholder.com/800x400/1a73e8/ffffff?text=North+East+Medical+College+View+1" alt="North East Medical College">
+                                <img src="https://via.placeholder.com/800x400/34a853/ffffff?text=North+East+Medical+College+View+2" alt="North East Medical College">
+                                <img src="https://via.placeholder.com/800x400/fbbc05/202124?text=North+East+Medical+College+View+3" alt="North East Medical College">
+                                <img src="https://via.placeholder.com/800x400/ea4335/ffffff?text=North+East+Medical+College+View+4" alt="North East Medical College">
+                                <img src="https://via.placeholder.com/800x400/1a73e8/ffffff?text=North+East+Medical+College+View+1" alt="North East Medical College"> <!-- Clone for loop -->
+                            </div>
+                        </div>
+
+                        <h2 class="section-title">About the College</h2>
+                        <p>North East Medical College is a premier medical institution located in Sylhet. It is known for its excellent academic environment and modern facilities. The college offers a 5-year MBBS course followed by a one-year internship. It is recognized by NMC, WHO, BMDC.</p>
+                        <br>
+                        <p><strong>Unique Selling Point:</strong> ROI: Only college paying salary during internship.</p>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="section-title">Fee Structure & Details</h2>
+                        <table class="info-table">
+                            <tr>
+                                <th>Total Official Package</th>
+                                <td>$42,500</td>
+                            </tr>
+                            <tr>
+                                <th>First Year Payment</th>
+                                <td>$12,500</td>
+                            </tr>
+                            <tr>
+                                <th>Food & Hostel</th>
+                                <td>Hostel Inc. / Food Self</td>
+                            </tr>
+                            <tr>
+                                <th>Estimated Real Cost (5 Years)</th>
+                                <td><strong>$45,500</strong></td>
+                            </tr>
+                            <tr>
+                                <th>Session</th>
+                                <td>25-26</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>Private</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="section-title">Facilities</h2>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> <strong>Hostel:</strong> Available</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Mess/Food:</strong> Self</li>
+                            <li><i class="fas fa-check-circle"></i> Library with Internet</li>
+                            <li><i class="fas fa-check-circle"></i> Modern Laboratories</li>
+                            <li><i class="fas fa-check-circle"></i> Hospital Attachment</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-card">
+                        <div class="price-tag">$42,500</div>
+                        <span class="price-label">Total Course Fee</span>
+
+                        <button class="action-btn btn-success" id="addToCompareBtn" onclick="toggleCollegeInCart('northeast')">Add to Compare</button>
+                        <button class="action-btn btn-primary" onclick="contactAdmission()">Contact for Admission</button>
+                        <button class="action-btn btn-outline" onclick="downloadBrochure()">Download Brochure</button>
+
+                        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+
+                        <h3 style="font-size: 18px; margin-bottom: 15px;">Eligibility</h3>
+                        <ul class="feature-list" style="font-size: 14px;">
+                            <li><i class="fas fa-check"></i> GPA 7.0+ (SSC+HSC)</li>
+                            <li><i class="fas fa-check"></i> Biology GPA 3.5+</li>
+                            <li><i class="fas fa-check"></i> NEET Qualified</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MBBS Bangladesh</h3>
+                    <p>Your complete guide to pursuing MBBS in Bangladesh.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="all-colleges.html">Colleges</a></li>
+                        <li><a href="comparison.html">Comparison</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Kolkata, India</li>
+                        <li><i class="fas fa-phone"></i> +91 8942954415</li>
+                        <li><i class="fas fa-envelope"></i> info@mbbscolleges.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MBBS Bangladesh. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Comparison Cart -->
+    <div class="floating-cart" id="floatingCart">
+        <div class="cart-header">
+            <h3>Comparison Cart</h3>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+        <div class="cart-content">
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart-message">No colleges added to comparison</div>
+            </div>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-success" id="compareBtn" disabled onclick="compareColleges()">Compare (0)</button>
+            <button class="btn btn-danger" onclick="clearCart()">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        // College Data (Embedded for Cart Logic)
+        const colleges = [{"id": "brahmanbaria", "name": "Brahmanbaria Medical College", "location": "Brahmanbaria", "session": "24-25", "officialFee": "$38,000", "firstPayment": "$14,000", "foodHostel": "Included (Both)", "realCost": "$38,000", "usp": "Best Value: Food is included in the fee.", "badge": "All Inclusive", "type": "Private", "established": "2013", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "4.2/5"}, {"id": "army-jashore", "name": "Army Medical College Jashore", "location": "Jashore", "session": "25-26", "officialFee": "$45,000", "firstPayment": "$20,500", "foodHostel": "Included (Mess+Laundry)", "realCost": "$45,000", "usp": "VIP: 5 meals/day, Laundry, Transport included.", "badge": "Army College", "type": "Army", "established": "2014", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "4.5/5"}, {"id": "northeast", "name": "North East Medical College", "location": "Sylhet", "session": "25-26", "officialFee": "$42,500", "firstPayment": "$12,500", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$45,500", "usp": "ROI: Only college paying salary during internship.", "badge": "ROI Focused", "type": "Private", "established": "2012", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.1/5"}, {"id": "president", "name": "President Abdul Hamid Medical College", "location": "Kishoreganj", "session": "25-26", "officialFee": "$36,000", "firstPayment": "$13,000", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$39,600", "usp": "Lowest base fee (if you manage food cheaply).", "badge": "", "type": "Private", "established": "2011", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.0/5"}, {"id": "akij", "name": "Ad-din Akij Medical College", "location": "Khulna", "session": "25-26", "officialFee": "$33,000", "firstPayment": "$13,000", "foodHostel": "Extra: $60/mo (Food+Util)", "realCost": "$36,600", "usp": "Very low tuition fee.", "badge": "", "type": "Private", "established": "2016", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "3.9/5"}, {"id": "sakina", "name": "Ad-din Sakina Women's", "location": "Jashore", "session": "25-26", "officialFee": "$33,000", "firstPayment": "$13,000", "foodHostel": "Extra: $140/mo (Total)", "realCost": "$41,400", "usp": "Secure campus for girls.", "badge": "Women Only", "type": "Private", "established": "2015", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "4.3/5"}, {"id": "momin", "name": "Ad-din Momin Medical College", "location": "Dhaka", "session": "25-26", "officialFee": "$35,000", "firstPayment": "$18,000", "foodHostel": "Extra: Util $25/mo", "realCost": "$40,000", "usp": "Affordable option near Dhaka.", "badge": "", "type": "Private", "established": "2014", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.0/5"}, {"id": "city", "name": "City Medical College", "location": "Gazipur", "session": "24-25", "officialFee": "$40,000", "firstPayment": "$17,000", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$43,600", "usp": "Large hospital association.", "badge": "", "type": "Private", "established": "2013", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.1/5"}, {"id": "us-bangla", "name": "US-Bangla Medical College", "location": "Narayanganj", "session": "24-25", "officialFee": "$40,000", "firstPayment": "$15,000", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$43,600", "usp": "Good infrastructure.", "badge": "", "type": "Private", "established": "2012", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.2/5"}, {"id": "central", "name": "Central Medical College", "location": "Cumilla", "session": "24-25", "officialFee": "$41,000", "firstPayment": "$16,000", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$44,600", "usp": "Established campus.", "badge": "", "type": "Private", "established": "2011", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.0/5"}, {"id": "samorita", "name": "MH Samorita Medical College", "location": "Dhaka", "session": "25-26", "officialFee": "$42,000", "firstPayment": "$18,000", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$45,600", "usp": "Located in heart of Dhaka.", "badge": "", "type": "Private", "established": "2010", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.3/5"}, {"id": "sylhet-women", "name": "Sylhet Women's Medical College", "location": "Sylhet", "session": "25-26", "officialFee": "$42,000", "firstPayment": "$15,000", "foodHostel": "Extra: Food ~$65/mo", "realCost": "$46,000", "usp": "Premium Women's college.", "badge": "Women Only", "type": "Private", "established": "2013", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "4.4/5"}, {"id": "addin-women", "name": "Ad-din Women's Medical College", "location": "Dhaka", "session": "25-26", "officialFee": "$43,000", "firstPayment": "$23,000", "foodHostel": "Extra: Util $30/mo", "realCost": "$48,000", "usp": "Top-tier strict women's college.", "badge": "Women Only", "type": "Private", "established": "2012", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.5/5"}, {"id": "jalalabad", "name": "Jalalabad Ragib-Rabeya", "location": "Sylhet", "session": "25-26", "officialFee": "$44,000", "firstPayment": "$20,000", "foodHostel": "Hostel Inc. / Food Incidental", "realCost": "$47,600", "usp": "Large campus, very reputed.", "badge": "", "type": "Private", "established": "2011", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "4.2/5"}, {"id": "dhaka-central", "name": "Dhaka Central Int. Medical College", "location": "Dhaka", "session": "25-26", "officialFee": "$44,500", "firstPayment": "$16,600", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$48,100", "usp": "Good location (Shyamoli).", "badge": "", "type": "Private", "established": "2014", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.1/5"}, {"id": "universal", "name": "Universal Medical College", "location": "Dhaka", "session": "24-25", "officialFee": "$45,000", "firstPayment": "$20,000", "foodHostel": "Hostel Inc. / Food Self", "realCost": "$48,600", "usp": "Known for good hospital flow.", "badge": "", "type": "Private", "established": "2013", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Self", "rating": "4.0/5"}, {"id": "women-hospital", "name": "Medical College for Women & Hospital", "location": "Dhaka", "session": "24-25", "officialFee": "$47,000", "firstPayment": "$15,000", "foodHostel": "Hostel Rent Extra?", "realCost": "$50,000+", "usp": "Oldest/Most Prestigious Women's college.", "badge": "Women Only", "type": "Private", "established": "1992", "recognition": "NMC, WHO, BMDC", "hostel": "Available", "mess": "Available", "rating": "4.6/5"}];
+
+        // Current College ID
+        const currentCollegeId = 'northeast';
+
+        // Cart Logic
+        let comparisonCart = [];
+
+        function toggleCollegeInCart(collegeId) {
+            const college = colleges.find(c => c.id === collegeId);
+
+            if (comparisonCart.includes(collegeId)) {
+                // Remove from cart
+                comparisonCart = comparisonCart.filter(id => id !== collegeId);
+            } else {
+                // Add to cart (max 2 colleges)
+                if (comparisonCart.length >= 2) {
+                    alert('You can only compare 2 colleges at a time. Please remove one from your cart first.');
+                    return;
+                }
+                comparisonCart.push(collegeId);
+            }
+
+            updateCartUI();
+        }
+
+        function removeFromCart(collegeId) {
+            comparisonCart = comparisonCart.filter(id => id !== collegeId);
+            updateCartUI();
+        }
+
+        function clearCart() {
+            comparisonCart = [];
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartElement = document.getElementById('floatingCart');
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const compareBtn = document.getElementById('compareBtn');
+            const addBtn = document.getElementById('addToCompareBtn');
+
+            // Save to localStorage
+            localStorage.setItem('comparisonColleges', JSON.stringify(comparisonCart));
+
+            // Update cart count
+            cartCount.textContent = comparisonCart.length;
+
+            // Update compare button
+            compareBtn.textContent = `Compare (${comparisonCart.length})`;
+            compareBtn.disabled = comparisonCart.length < 2;
+
+            // Update cart items
+            cartItems.innerHTML = '';
+
+            if (comparisonCart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart-message">No colleges added to comparison</div>';
+                cartElement.classList.remove('active');
+            } else {
+                comparisonCart.forEach(collegeId => {
+                    const college = colleges.find(c => c.id === collegeId);
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <span class="cart-item-name">${college.name}</span>
+                        <button class="cart-item-remove" onclick="removeFromCart('${collegeId}')">&times;</button>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+                cartElement.classList.add('active');
+            }
+
+            // Update main button state
+            if (addBtn) {
+                if (comparisonCart.includes(currentCollegeId)) {
+                    addBtn.textContent = '✓ Added to Compare';
+                    addBtn.classList.remove('btn-success');
+                    addBtn.classList.add('btn-primary');
+                } else {
+                    addBtn.textContent = 'Add to Compare';
+                    addBtn.classList.remove('btn-primary');
+                    addBtn.classList.add('btn-success');
+                }
+            }
+        }
+
+        function compareColleges() {
+            if (comparisonCart.length !== 2) {
+                alert('Please select exactly 2 colleges to compare.');
+                return;
+            }
+            localStorage.setItem('comparisonColleges', JSON.stringify(comparisonCart));
+            window.location.href = 'comparison.html';
+        }
+
+        function contactAdmission() {
+            const phoneNumber = "917501070407";
+            const message = "Hello! I am interested in admission for North East Medical College. Please provide details.";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function downloadBrochure() {
+            alert('Brochure download starting...');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCart = localStorage.getItem('comparisonColleges');
+            if (savedCart) {
+                comparisonCart = JSON.parse(savedCart);
+            }
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
